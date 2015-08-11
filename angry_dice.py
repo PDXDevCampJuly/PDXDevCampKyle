@@ -53,17 +53,19 @@ Press ENTER to start!
 
         Arguments:
         string = an input string from the user.
+        VALUES = values you're allowed to hold in each stage.
         """
+        VALUES = [["1", "2"], ["ANGRY", "4"], ["5"]]
         cheating = False
         if "a" not in string:
             self.die_a.held = True
-            if self.die_a.value == "6":
+            if self.die_a.value not in VALUES[self.stage - 1]:
                 cheating = True
         else:
             self.die_a.held = False
         if "b" not in string:
             self.die_b.held = True
-            if self.die_b.value == "6":
+            if self.die_b.value not in VALUES[self.stage - 1]:
                 cheating = True
         else:
             self.die_b.held = False
@@ -81,7 +83,7 @@ Press ENTER to start!
         Arguments: none
         """
         if self.cheating:
-            print("You're cheating! You cannot lock a 6! You cannot win")
+            print("You're cheating!")
             print("until you reroll it!")
         print("""
 You rolled:
