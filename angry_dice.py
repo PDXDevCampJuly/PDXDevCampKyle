@@ -19,9 +19,8 @@ class Angry_dice:
 
     def play(self):
         """Controls the actual flow of the game."""
-        done = False
-        while not done:
-            print("""
+
+        input("""
 Welcome to Angry Dice! Roll the two dice until you get thru the 3 Stages!
 Stage 1 you need to roll 1 & 2
 Stage 2 you need to roll ANGRY & 4
@@ -35,16 +34,16 @@ To rol the dice, simply input the name of the die you want to roll.
 Their names are a and b.
 
 Press ENTER to start!
-            """)
-            input("")
-            self.cheating = self.roll_parse("ab")
-            while not done:
-                self.print_hand()
-                decision = input("Roll dice: ")
-                self.cheating = self.roll_parse(decision)
-                done = self.advance_check()
+        """)
+        self.cheating = self.roll_parse("ab")
+        done = False
+        while not done:
             self.print_hand()
-            print("You've won!  Calm down!")
+            decision = input("Roll dice: ")
+            self.cheating = self.roll_parse(decision)
+            done = self.advance_check()
+        self.print_hand()
+        print("You've won!  Calm down!")
 
     def roll_parse(self, string):
         """
@@ -99,7 +98,6 @@ You are in Stage {}
         if self.stage == 3:
             if not self.cheating and "5" in values and "6" in values:
                 return True
-            return False
         if self.stage == 2 and "ANGRY" in values and "4" in values:
             self.stage = 3
         if self.stage == 1 and "1" in values and "2" in values:
